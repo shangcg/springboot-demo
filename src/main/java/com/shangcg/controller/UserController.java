@@ -22,7 +22,7 @@ public class UserController {
 	private IUserService userService;
 	
 	@RequestMapping("/showUser")
-	public User toIndex(@RequestParam(value="userId", defaultValue="0") Integer userId){
+	public User getUser(@RequestParam(value="userId", defaultValue="0") Integer userId){
 		try {
 			User user = this.userService.getUserById(userId);
 			return user;

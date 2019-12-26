@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-public class UnitDemoController {
+public class JunitDemoController {
 
     @RequestMapping(value = "/hello.json", method = RequestMethod.GET)
     public String getListTag(HttpServletRequest request,

@@ -7,7 +7,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 
 /**
  * @version v1.0
- * @Description: TODO
+ * @Description: redis工具类
  * @Author: shangcg
  * @Date: 2019/12/26
  */

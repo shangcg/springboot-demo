@@ -1,4 +1,4 @@
-package hello;
+package com.shangcg;
 
 public class Greeting {
 

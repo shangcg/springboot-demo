@@ -24,12 +24,12 @@ public class RedisUtilTest extends RootTest {
 
     @Test
     public void set() {
-        redisUtil.set("redis_key", "redis_vale");
+        redisUtil.set("key", "shangcg");
     }
 
     @Test
     public void getAndSet() {
-        String value = redisUtil.get("redis_key");
+        String value = redisUtil.get("key");
         System.out.println(value);
     }
 

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @version v1.0
- * @Description: 向rabbitmq  TestDirectQueue队列发送消息
+ * @Description: 话题模式 向rabbitmq 队列发送消息
  * @Author: shangcg
  * @Date: 2019/12/31
  */
@@ -23,17 +23,29 @@ public class SendMessageController {
     @Autowired
     RabbitTemplate rabbitTemplate;  //使用RabbitTemplate,这提供了接收/发送等等方法
 
-    @GetMapping("/sendDirectMessage")
-    public String sendDirectMessage() {
+    @GetMapping("/sendTopicMessage1")
+    public String sendTopicMessage1() {
         String messageId = String.valueOf(UUID.randomUUID());
-        String messageData = "test message, hello!";
+        String messageData = "message: M A N ";
         String createTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        Map<String,Object> map=new HashMap<>();
-        map.put("messageId",messageId);
-        map.put("messageData",messageData);
-        map.put("createTime",createTime);
-        //将消息携带绑定键值：TestDirectRouting 发送到交换机TestDirectExchange
-        rabbitTemplate.convertAndSend("TestDirectExchange", "TestDirectRouting", map);
+        Map<String, Object> manMap = new HashMap<>();
+        manMap.put("messageId", messageId);
+        manMap.put("messageData", messageData);
+        manMap.put("createTime", createTime);
+        rabbitTemplate.convertAndSend("topicExchange", "topic.man", manMap);
+        return "ok";
+    }
+
+    @GetMapping("/sendTopicMessage2")
+    public String sendTopicMessage2() {
+        String messageId = String.valueOf(UUID.randomUUID());
+        String messageData = "message: woman is all ";
+        String createTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        Map<String, Object> womanMap = new HashMap<>();
+        womanMap.put("messageId", messageId);
+        womanMap.put("messageData", messageData);
+        womanMap.put("createTime", createTime);
+        rabbitTemplate.convertAndSend("topicExchange", "topic.woman", womanMap);
         return "ok";
     }
 

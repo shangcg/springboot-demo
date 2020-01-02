@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * @version v1.0
- * @Description: rabbitmq采取直连方式的配置
+ * @Description: rabbitmq采取直连方式的配置, 并将队列绑定到交换机
  * @Author: shangcg
  * @Date: 2019/12/31
  */

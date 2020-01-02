@@ -23,7 +23,7 @@ public class SendMessageController {
     @Autowired
     RabbitTemplate rabbitTemplate;  //使用RabbitTemplate,这提供了接收/发送等等方法
 
-    @GetMapping("/sendTopicMessage1")
+    @GetMapping("/sendTopicMessage1")   //只会被 topic.man 队列接收
     public String sendTopicMessage1() {
         String messageId = String.valueOf(UUID.randomUUID());
         String messageData = "message: M A N ";
@@ -36,7 +36,7 @@ public class SendMessageController {
         return "ok";
     }
 
-    @GetMapping("/sendTopicMessage2")
+    @GetMapping("/sendTopicMessage2")  //会被 所有队列接收
     public String sendTopicMessage2() {
         String messageId = String.valueOf(UUID.randomUUID());
         String messageData = "message: woman is all ";

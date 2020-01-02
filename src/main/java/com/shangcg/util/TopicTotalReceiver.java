@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @version v1.0
- * @Description: rabbit消费端 监听， 监听采用topic方式连接的生产者
+ * @Description: rabbitmq消费端 监听， 监听采用topic方式连接的生产者
  * @Author: shangcg
  * @Date: 2020/1/2
  */

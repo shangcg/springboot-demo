@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Configuration;
 @ConditionalOnProperty(name = "spring.datasource.type", havingValue = "com.alibaba.druid.pool.DruidDataSource", matchIfMissing = true)
 public class DruidDataSourceConfig {
 
-
+    //http://localhost:8080/druid/datasource.html  连接池监控访问地址
 
     @Bean
     @ConfigurationProperties("spring.datasource.druid")

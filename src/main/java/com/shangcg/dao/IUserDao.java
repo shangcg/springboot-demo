@@ -3,6 +3,9 @@ package com.shangcg.dao;
 import com.shangcg.pojo.User;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
+
 @Mapper
 public interface IUserDao {
 
@@ -17,4 +20,10 @@ public interface IUserDao {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    /**
+     * 批量插入数据
+     * @return
+     */
+    int batchInsertData(List<User> users);
 }

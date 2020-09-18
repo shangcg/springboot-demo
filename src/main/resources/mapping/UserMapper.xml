@@ -44,6 +44,16 @@
       #{age,jdbcType=INTEGER})
   </insert>
 
+  <insert id="batchInsertData">
+    insert into user_t (id, user_name, password,
+      age)
+    values
+    <foreach collection="users" item="user" separator=",">
+     (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+      #{age,jdbcType=INTEGER})
+    </foreach>
+  </insert>
+
   <insert id="insertSelective" parameterType="com.shangcg.pojo.User" >
     insert into user_t
     <trim prefix="(" suffix=")" suffixOverrides="," >

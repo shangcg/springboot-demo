@@ -18,4 +18,7 @@ public interface IUserService {
 	 * @return
 	 */
 	public User getUserById(int userId);
+
+
+	void BatchInsertData();
 }

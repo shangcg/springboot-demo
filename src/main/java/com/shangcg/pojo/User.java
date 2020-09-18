@@ -1,5 +1,6 @@
 package com.shangcg.pojo;
 
+
 public class User {
     private Integer id;
 

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.shangcg.pojo.User;
 import com.shangcg.service.IUserService;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,6 +31,15 @@ public class UserController {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @RequestMapping(value = "/insert_user", method = RequestMethod.POST)
+    public void getUser() {
+        try {
+            userService.BatchInsertData();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

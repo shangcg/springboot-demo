@@ -25,16 +25,18 @@ public class Test {
 ////        Object b = map.computeIfAbsent("b", k -> new HashSet<>(5));
 //
 //        System.out.println(cc);
-        cacl();
+//        cacl();
+
+        add();
     }
 
     static void cacl(){
 
         //下一年度自由现金流基准
-        double t = 350;
+        double t = 100;
 
         //折现
-        Double R = 0.07;
+        Double R = 0.08;
 
         //增长
         Double increase = 0.20;
@@ -54,7 +56,7 @@ public class Test {
         float a = 0;
 
         //总股本
-        double gb = 73.3 * Math.pow(10,8);
+        double gb = 54.22 * Math.pow(10,8);
 
         for (int i = 1 ; i <= 10; i++){
 
@@ -105,4 +107,18 @@ public class Test {
 //    动态市盈率= 股票现价÷未来每股收益的预测值
 
 //    市价用的都是滚动市盈率 * 滚动每股收益
+
+
+
+    public static void add(){
+        Double a = 50.00;
+        Double crease = 0.10;
+        Double total = 0.0;
+        for (int i = 1; i < 50; i++){
+            double pow = a * Math.pow((1 + crease), i);
+            total += pow;
+            System.out.println("第"+ i +"年回收金额：" + pow);
+            System.out.println("回收总金额：" + total);
+        }
+    }
 }

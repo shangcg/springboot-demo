@@ -29,7 +29,7 @@ public class ExecutorServiceCalculator implements Calculator{
         private int from;
         private int to;
         private SumTask(long[] numbers, int from, int to){
-            System.out.println(Thread.currentThread().getName());
+//            System.out.println(Thread.currentThread().getName());
             this.numbers = numbers;
             this.from = from;
             this.to = to;
@@ -37,7 +37,7 @@ public class ExecutorServiceCalculator implements Calculator{
 
         @Override
         public Long call(){
-            System.out.println(Thread.currentThread().getName());
+//            System.out.println(Thread.currentThread().getName());
             long total = 0;
             for (int i = from; i <= to; i++){
                 total += numbers[i];
@@ -54,8 +54,8 @@ public class ExecutorServiceCalculator implements Calculator{
         for (int i = 0; i < cpuNumber; i++){
             int from = i * part;
             int to = (i == cpuNumber -1) ? numbers.length - 1: (i +1) * part -1;
-
-            results.add(pool.submit(new SumTask(numbers, from, to)));
+            Future<Long> submit = pool.submit(new SumTask(numbers, from, to));
+            results.add(submit);
         }
 
         long total = 0;
@@ -72,7 +72,7 @@ public class ExecutorServiceCalculator implements Calculator{
 
 
     public static void main(String[] args) {
-        long[] numbers = LongStream.rangeClosed(1, 10000000).toArray();
+        long[] numbers = LongStream.rangeClosed(1, 2000000000).toArray();
 
         Instant start = Instant.now();
         Calculator calculator = new ExecutorServiceCalculator();

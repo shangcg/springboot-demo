@@ -62,6 +62,19 @@
             <version>25.1-jre</version>
         </dependency>
 
+        <!-- 监控指标度量类库 -->
+        <dependency>
+            <groupId>io.dropwizard.metrics</groupId>
+            <artifactId>metrics-core</artifactId>
+            <version>3.2.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.dropwizard.metrics</groupId>
+            <artifactId>metrics-healthchecks</artifactId>
+            <version>3.2.6</version>
+        </dependency>
+
     </dependencies>
 
 

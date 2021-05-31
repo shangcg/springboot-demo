@@ -2,12 +2,17 @@ package jvm;
 
 import org.junit.Test;
 
+
+/**
+ * 栈溢出demo
+ */
 public class TestStack {
 
     private  int count = 0;
 
-    public void recursion(){
+    public void recursion() throws InterruptedException {
         count ++;
+        Thread.sleep(50000);
         recursion();
     }
 

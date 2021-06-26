@@ -1,6 +1,7 @@
 package com.shangcg.mode.decorator;
 
 /**
+ * 该类是抽象装饰类
  * 实现shape接口的抽象装饰类
  *
  * 该类为装饰类，持有被装饰接口对象

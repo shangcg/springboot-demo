@@ -1,7 +1,7 @@
 package com.shangcg.mode.decorator;
 
 /**
- * 对包装类的扩展，包装类为shapeDecorator
+ * 装饰类 装饰被装饰者shape 动态扩展shape功能，包装类为shapeDecorator
  */
 public class RedShapeDecorator extends ShapeDecorator{
     public RedShapeDecorator(Shape decoratedShape) {

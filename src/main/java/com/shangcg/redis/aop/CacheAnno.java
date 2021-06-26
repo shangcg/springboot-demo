@@ -12,17 +12,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CacheAnno {
 
-//    String key();		//定义key值
-//    Class targetClass(); //定义目标类型
-//    CACHE_TYPE cacheType() default CACHE_TYPE.FIND;
-//
-//    /**
-//     * 查找和更新缓存的处理方法不一样，更新逻辑为先删除再同步数据到缓存
-//     *
-//     */
-//    enum CACHE_TYPE{
-//        FIND,		//定义查找
-//        UPDATE		//定义更新
-//    }
+    String key();
 
 }

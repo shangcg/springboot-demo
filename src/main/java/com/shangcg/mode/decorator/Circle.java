@@ -1,6 +1,7 @@
 package com.shangcg.mode.decorator;
 
 /**
+ * 被装饰者
  * 装饰器模式：接口实现类
  */
 public class Circle implements Shape{

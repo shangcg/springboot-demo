@@ -36,6 +36,10 @@ public class MoveZeros {
         for (int i = 0; i < a.length; i++){
             System.out.println(a[i]);
         }
+
+        while (true){
+            System.out.println(11111);
+        }
     }
 
 

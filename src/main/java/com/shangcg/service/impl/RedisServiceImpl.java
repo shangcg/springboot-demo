@@ -7,7 +7,7 @@ import com.shangcg.redis.aop.CacheAnno;
 @Service
 public class RedisServiceImpl implements RedisService {
 
-    @CacheAnno
+    @CacheAnno(key = "testKey")
     @Override
     public String addUser(String name) {
         System.out.println("aa");

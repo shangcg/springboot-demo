@@ -10,6 +10,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.aop.framework.AopProxyUtils;
 import org.springframework.stereotype.Component;
 import redis.clients.jedis.Jedis;
 
@@ -36,6 +37,7 @@ public class RedisCacheAspect {
 
         long startTime = System.currentTimeMillis();
 
+
         //获得目标方法的方法名称
         MethodSignature signature = (MethodSignature) proceedingJoinPoint.getSignature();
         String methodName = signature.getName();
@@ -46,6 +48,13 @@ public class RedisCacheAspect {
         logger.info("类名："+className);
         StringBuilder builder = new StringBuilder();
         builder.append(methodName).append(":");
+
+        CacheAnno annotation = signature.getMethod().getAnnotation(CacheAnno.class);
+
+
+        getTargetClass(annotation.getClass());
+
+
 
         //获取目标方法的参数
         Object[] args = proceedingJoinPoint.getArgs();
@@ -96,6 +105,10 @@ public class RedisCacheAspect {
         jedis.close();
     }
 
+
+    private Class<?> getTargetClass(Object target) {
+        return AopProxyUtils.ultimateTargetClass(target);
+    }
 
 
 

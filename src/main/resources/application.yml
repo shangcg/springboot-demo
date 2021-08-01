@@ -1,5 +1,10 @@
 server:
   port: 8099
+  tomcat:
+    min-spare-threads: 20
+    max-threads: 50
+    max-connections: 1000
+    accept-count: 50
 
 
 spring:

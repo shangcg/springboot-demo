@@ -72,7 +72,7 @@ public class ExecutorServiceCalculator implements Calculator{
 
 
     public static void main(String[] args) {
-        long[] numbers = LongStream.rangeClosed(1, 2000000000).toArray();
+        long[] numbers = LongStream.rangeClosed(1, 200000).toArray();
 
         Instant start = Instant.now();
         Calculator calculator = new ExecutorServiceCalculator();

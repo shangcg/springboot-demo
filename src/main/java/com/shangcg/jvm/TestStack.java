@@ -25,4 +25,13 @@ public class TestStack {
             e.printStackTrace();
         }
     }
+
+    public static void test(){
+        System.out.println("sss");
+    }
+
+
+    public static void main(String[] args) {
+        ((TestStack)(null)).test();
+    }
 }

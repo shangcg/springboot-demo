@@ -1,4 +1,4 @@
-package com.shangcg.util;
+package com.shangcg.jvm.gc;
 
 
 import java.util.ArrayList;

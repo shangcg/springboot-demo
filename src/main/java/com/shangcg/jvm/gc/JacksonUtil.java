@@ -1,4 +1,4 @@
-package com.shangcg.util;
+package com.shangcg.jvm.gc;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;

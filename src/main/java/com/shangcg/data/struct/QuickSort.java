@@ -29,11 +29,6 @@ public class QuickSort {
                 nums[j] = t;
             }
         }
-        if (i == j){
-            System.out.println(true);
-        }else {
-            System.out.println(false);
-        }
         quickSort(nums, left, i);
         quickSort(nums, i + 1, high);
     }

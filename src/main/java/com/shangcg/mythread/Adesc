@@ -1,0 +1,158 @@
+多线程：
+锁的传统版本三剑客： synchronized、 wait、 notify
+    synchronized 控制多个线程执行同一块资源  ProducerConsumerTest
+juc版本的三剑客：   lock、  condition.await、  condition.signal
+    lock condtion控制多个线程执行同一块资源 ProducerLock
+condition实现精准通知
+    三个线程A、B、C A执行完后通知B、B执行完后通知C  ConditionTest
+什么是锁：
+如何判断锁的对象是谁：锁只会锁两种东西， 锁对象、锁class
+
+线程八锁问题：
+synchronized void method(){} 此处锁的是对象，即调用该方法的对象，同一个对象调用该对象中的其他synchronized方法，会被阻塞
+        如：method1()、method2()都为synchronized方法， 则 a.method1(), a.method2() 会排队执行  a.method1()， b.method2()互不影响
+static synchronized void method{} 因为有静态修饰符static， 此处锁的是class对象，不管是不是同一个对象调用，都会被阻塞
+        如：static method1()  method2(),则 a.method1 和 a.method2互不影响， a.method1和b.method1就会排队
+八锁问题两句话汇总：static锁的是class、 普通方法锁的是this，即这个对象本身
+
+CopyOnWriteArrayList
+List<String> list = Arrays.asList("1","2,"3);
+for(int i = 0; i < 10; i++){
+	new Thread(() ->{
+		list.add(UUID.randomUUID().toString.subString(0,5));
+		System.out.println(list);
+	})
+}
+
+List<String> list = new Vector<>();
+List<String> list = Collections.synchronizedList(new ArrayList);
+List<String> list = new CopyOnWriteArrayList<>();
+
+//并发修改异常
+java.util.ConcurrentModifycationException
+
+CopyOnWriteArrayList 比vector牛逼在哪： 前者lock锁，后者synchronized
+
+CopyOnWriteArraySet
+//HashSet的底层原理 底层是hashMap； add的底层原理是map， key是无法重复的
+void main(){
+    // Set<String> set = new HashSet<>(); 不安全写法
+    Set<String> set = new HashSet<>();
+    for(int i = 1; i <= 10; i++){
+        new Thread(() -> {
+            set.add(UUID.randomUUID().toString().subString(0,5));
+        })
+    }
+}
+
+ConcurrentHashMap: map是线程不安全的，ConcurrentHashMap是线程安全的
+void main(){
+    //map有2个默认值：1加载因子 2初使容量
+    //默认值 new HashMap<>(16, 0.75);
+    Map<String,Object> map = new HashMap<>();
+    Map<String, Object> map = new ConcurrentHashMap<>();
+    for(int i = 0; i < 10; i++){
+        new Thread(() ->{
+            map.put(Thread.getcurrentThread.getName(), UUID.random().toString().subString(0,5));
+
+        }, String.valueOf(i)).start()
+    }
+}
+
+Callable(简单)
+可以抛出异常
+可以有返回值
+
+有缓存？
+会阻塞
+
+CallableTest{
+    void main(){
+        new Thread(new Runnable()).start();
+        new Thread(new FutureTask<V>()).start();
+        new Thread(new FutureTask<V>(Callable)).task;
+
+        MyThread t = new MyThread();
+        FutureTask futureTask = new FutureTask(t);
+        new Thread(futureTask, "A").start();
+
+        Integer o = futureTask.get(); //此处可能会阻塞，放到最后
+        System.out.println(o);
+
+    }
+}
+
+class MyThread implements Callable<String>{
+    @Override
+    public String call(){
+        return 1024;
+    }
+}
+
+多线程常用辅助工具类
+CountDownLatch 减法计数器 闭锁 主要作用1：主线程等待多个子线程执行结束  2：使某些线程同时执行，类似同时起跑
+    核心方法： 数量 -1 countDownLatch.countDown();   计数器归零 countDownLatch.await();
+
+CyclicBarrier 加法计数器 核心方法 cyclicBarrier.await();
+void main{
+    CyclicBarrier cyclicBarrier = new CyclicBarrier(7, () ->{
+        System.out.println("召唤神龙");
+    });
+
+    for(int i = 0; i <= 7; i++){
+        final int temp = i;
+        new Thread(->{
+            cyclicBarrier.await();
+        }).start();
+    }
+}
+
+Semaphore信号量 用于限流
+抢车位案例： 6辆车-3个停车位
+核心方法：semaphore.acquire() 获得，假设如果已经满了，等待被释放为止
+        semaphore.release() 释放，会将当前信号量释放掉， 可用+1
+void main{
+    Semaphore semaphore = new Semaphore(3);
+    for(int i = 1; i < 6; i++){
+        new Thread(()->{
+            try{
+               //acquire() 得到
+               System.out.println(Thread.currentThread().getName() + "抢到车位");
+            }finally{
+                semaphore.release(); //释放
+            }
+        }).start();
+    }
+}
+
+读写锁
+独占锁（写锁）
+共享锁(读锁)
+读-读 可以共存
+读-写 不可以共存
+写-写 不能共存
+ReadWriteLock
+
+class MyCache{
+    private volatile Map<String,Object> map = new HashMap<>();
+    private ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
+    //写
+    public void put(String key, Object value){
+        readWriteLock.writeLock().lock();
+        try{
+            System.out.println(Thread.currentThread().getName() + "写入" + key);
+            map.put(key, value);
+            System.out.println(Thread.currentThread().getName() + "写入OK" + key)
+        }finally{
+            readWriteLock.writeLock().unlock();
+        }
+
+    }
+
+    //读
+    public void get(String key){
+        map.get(key);
+    }
+}
+
+ReenTrantReaderLock
